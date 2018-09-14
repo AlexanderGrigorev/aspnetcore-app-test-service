@@ -1,0 +1,16 @@
+language: none
+
+build:
+  pre_ci_boot:
+    image_name: microsoft/dotnet
+    image_tag: 2.1-sdk 
+    pull: true
+    options: "-e HOME=/aspnetcore-app-test-service"
+
+  ci:
+    - apt-get --assume-yes install xsltproc
+    # Removed the sed to treat warnings as errors
+    - dotnet restore
+     # Re-enable this when StyleCop.Analyzers is updated with the fix.
+    - dotnet build # /p:TreatWarningsAsErrors=true
+   
